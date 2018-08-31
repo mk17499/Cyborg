@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<stdlib.h>
+ int main()
+  {
+    int T,arr[1000],brr[1000],n,m,i,j,k,l,x,y,z,pt=0,ptr[1000],a;
+ 
+    scanf("%d",&T);
+ 
+    for(i=0;i<T;i++)
+      {
+	scanf("%d",&n);
+	scanf("%d",&m);
+ 
+		for(j=0;j<n;j++)
+		  {
+		    arr[j]=j+1;
+		  }
+		for(k=0;k<m;k++)
+		  {
+		    scanf("%d",&brr[k]);
+		  }
+ 
+		    for(l=0;l<n;l++)
+		      {
+			for(x=0;x<m;x++)
+			{
+			    if(arr[l]==brr[x])
+			     {
+				arr[l]=0;
+			     }
+			}
+		      }
+ 
+		    for(y=0;y<n;y++)
+		      {
+			if(arr[y]==0)
+			 {
+			   continue;
+			 }
+			 else
+			 {
+			   ptr[pt]=arr[y];
+			   pt++;
+			 }
+		       }
+		       pt=pt-1;
+		if(pt%2==0)
+		 {
+		       for(z=0;z<=pt;z=z+2)
+			{
+			  printf("%d ", ptr[z]);
+			}
+			printf("\n");
+		       for(a=1;a<=pt-1;a=a+2)
+			{
+			  printf("%d ",ptr[a]);
+			}
+		  }
+		else
+		 {
+			      for(z=0;z<=pt-1;z=z+2)
+			{
+			  printf("%d ", ptr[z]);
+			}
+			printf("\n");
+		       for(a=1;a<=pt;a=a+2)
+			{
+			  printf("%d ",ptr[a]);
+			}
+		}
+		   printf("\n");
+		   pt=0;
+ 
+	  }
+ 
+      return 0;
