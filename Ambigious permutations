@@ -1,0 +1,55 @@
+#include<stdio.h>
+ 
+#include<stdlib.h>
+ int main()
+   {
+     long int a,*ptr,*ctr,i,j,k,l,count=0;
+     
+     kshitiz :
+     scanf("%ld",&a);
+     if(a!=0)
+     {
+       ptr=(long int*)calloc(a,sizeof(long int));
+       ctr=(long int*)calloc(a,sizeof(long int));
+       for(i=0;i<a;i++)
+	 {
+		 scanf("%ld",ptr+i);
+	 }
+       for(j=1;j<=a;j++)
+	 {
+	  k=0;
+	 while(*(ptr+(k-1))!=j)
+	   {
+	   k++;
+	   if(*(ptr+(k-1))==j)
+	     {
+	       *(ctr+(j-1))=k;
+	     }
+	   }
+	 }
+     for(l=0;l<a;l++)
+       {
+	 if(*(ptr+l)==*(ctr+l))
+	   {
+	     count++;
+	   }
+       }
+       if(count==a)
+		{
+		 printf("ambiguous\n");
+		}
+       else
+		{
+		 printf("not ambiguous\n");
+		}
+		count=0;
+		goto kshitiz;
+    }
+      else
+       {
+	exit(0) ;
+       }
+ 
+       
+       return 0;
+   } 
