@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+ {
+  int *ptr,*ctr,i,j,k,gcd,n,l,rem=1,T;
+  clrscr();
+  scanf("%d",&T);
+  for( l=0;l<T;l++)
+   {
+     scanf("%d",&n);
+     ptr=(int*)calloc(n,sizeof(int));
+     ctr=(int*)calloc(n,sizeof(int));
+	  for(i=0;i<n;i++)
+	     {
+		scanf("%d",ptr+i);
+		*(ctr+i)=*(ptr+i);
+	     }
+	  for(j=0;j<n-1;j++)
+	     {
+		 rem=1;
+		 while(rem>0)
+		   {
+			  if(*(ptr+j)<=*(ptr+(j+1)))
+			    {
+				rem=*(ptr+(j+1))%*(ptr+j);
+				if(rem==0)
+				 {
+				   *(ptr+(j+1))=*(ptr+j);
+				   gcd=*(ptr+j);
+				   break;
+				 }
+				 else
+				 {
+				    gcd=rem;
+				    *(ptr+(j+1))=rem;
+				 }
+			     }
+			  else
+			     {
+				rem=*(ptr+j)%*(ptr+(j+1));
+				if(rem==0)
+				 {
+				   gcd=*(ptr+(j+1));
+				   break;
+				 }
+				else
+				 {
+				   gcd=rem;
+				   *(ptr+j)=rem;
+				 }
+			     }
+		   }
+	     }
+	     for(k=0;k<n;k++)
+		 {
+		   printf("%d ",*(ctr+k)/gcd);
+		 }
+	     printf("\n");
+   }
+      free(ptr);
+      free(ctr);
+      getch();
+      return 0;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
