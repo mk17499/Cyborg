@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void checkSubsequences(int arr[], int n,int order)
+{
+    int t=1,sum=0,flag=0;
+    int Size = pow(2, n);
+    for (int counter = 1; counter < Size; counter++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (counter & (1<<j))
+            {
+                sum+=arr[j];
+            }
+            if(sum==order)
+            {
+                flag=1;
+                cout<<"Yes"<<endl;
+                goto there;
+            }
+        }
+       sum=0;
+        t++;
+    }
+    there :
+     if(flag==0)
+            cout<<"No"<<endl;
+}
+int main()
+{
+    int T,N,order,arr[21],c=0;
+    cin>>T;
+    for(int i=0;i<T;i++)
+    {
+        cin>>N>>order;
+        for(int j=0;j<N;j++)
+            cin>>arr[j];
+        checkSubsequences(arr,N,order);
+    }
+    return 0;
+}
