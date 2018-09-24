@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+int start=0;
+int end;
+struct temp
+{
+  int sum;
+  int start;
+  int end;
+};
+void licarray(int arr[],int n,struct temp t)
+{
+  int sum=0;
+  t.sum=0;
+  int j,i;
+  for(i=0;i<=n;i++)
+  {
+    for(j=i;j<=n;j++)
+    {
+       if(arr[j]<arr[j+1])
+         sum= sum + arr[j];
+       else
+       {
+         sum = sum + arr[j];
+         break;
+       }
+    }
+    if(sum>t.sum)
+    {
+      t.sum=sum;
+      t.start=i;
+      t.end=j;
+    }
+    sum=0;
+  }
+  cout<<" MAX INCREASING CONTIGUOUS SUBSEQUENCE SUM =  "<<t.sum<<" sratring index  = "<<t.start<<" ending index = "<<t.end<<endl;
+}
+int main()
+{
+  int a[]={1,4,3,11,4,15,19,6};
+  temp b;
+  int s = sizeof(a)/sizeof(a[0]);
+  licarray(a,s-1,b);
+  return 0;
+}
