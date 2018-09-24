@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+long int Max(long int x)
+{
+    long int a[]={x/2,x/3,x/4};
+    long int t=x/2+ x/3+ x/4;
+    if(x/2==0 || x/3==0 || x/4==0)
+        return (t>x?t:x);
+
+    else
+    {
+        int sum=0;
+        for(int i=0;i<3;i++)
+        {
+            sum=sum+Max(a[i]);
+        }
+      return sum;
+    }
+}
+int  main()
+{
+    long int a;
+    cin>>a;
+    long int ans=Max(a);
+    cout<<ans<<endl;
+    return 0;
+}
+// TO BE OPTIMIZED
+// ANOTHER METHOD : DP
