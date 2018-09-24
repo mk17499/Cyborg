@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+int subarray(int arr[],int a[],int n,int start)
+{
+  int max_ans=-1;
+  int max_here=0;
+  int temp=0;
+  for(int i=start;i<n;i++)
+  { 
+    max_here=max_here+ arr[i];
+    if(max_ans<max_here)
+      max_ans=max_here;
+      
+       for(int k=0;k<2*n;k++)
+         {
+           if(max_ans==a[k])
+           {
+             a[k]=0;
+             temp++;
+           }
+         }
+  }
+  return temp;
+}
+int main()
+{
+  int T,n,ans;
+  cin>>T;
+  for(int i=0;i<T;i++)
+  {
+    cin>>n;
+    int a[n];
+    int b[2*n];
+    for(int j=1;j<=2*n;j++)
+      b[j-1]=j;
+    for(int j=0;j<n;j++)
+    {
+      cin>>a[j];
+    }
+    for(int j=0;j<n;j++)
+    {
+      ans = ans + subarray(a,b,n,j);
+    }
+       cout<<ans<<endl;
+      ans=0;
+  }
+  return 0;
+}
