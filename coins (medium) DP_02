@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+#include<vector>
+using namespace std;
+vector<long int>lookup;
+void initialize()
+{
+  for(long int i=0;i<=100000000;i++)
+  {
+    lookup.push_back(-1);
+  }
+}
+
+long int xchange(long int n)
+{
+  if(lookup[n]==-1)
+  {
+    if(n<=4)
+      lookup[n]=n;
+    else
+      lookup[n]=max(n,(xchange(n/2) +xchange (n/3) +xchange (n/4)));
+  }
+  return lookup[n];
+}
+int main()
+{
+  long int T,n;
+  initialize();
+  cin>>T;
+  for(long int i=0;i<T;i++)
+  {
+     cin>>n;
+     long int ans= xchange(n);
+     cout<<ans<<endl;
+  }
+  return 0;
+}
