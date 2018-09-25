@@ -42,10 +42,10 @@ int main()
 {
   string input;
   cin>>input;
- string dict[12];
+  string dict[12];
   for(int i=0;i<12;i++)
-    cin>>dict[i];
-  int d=4;
+  cin>>dict[i];
+ 
   int c=0,count=0;
   while(input[c]!='\0')
   {
