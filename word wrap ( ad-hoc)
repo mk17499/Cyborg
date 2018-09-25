@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+#include<string>
+using namespace std;
+void wordCheck(string dict[],string input,int input_size,int dict_size)
+{
+  int flag = 0;
+  int temp,count=0;
+  for(int i=0;i<input_size;i++)
+  {
+    char c=input[i];
+    for(int j=0;j<dict_size;j++)
+    {
+      if(dict[j][0]==c)
+      {
+        temp=i;
+
+         int t=0;
+         while(dict[j][t]==input[temp+t])
+             {
+                 if(dict[j][t+1]=='\0')
+                   {
+                      flag=1;
+                      break;
+                   }
+                   t++;
+             }
+             if(flag==1)
+             {
+                cout<<dict[j]<<" ";
+                count++;
+             }
+       flag=0;
+      }
+    }
+  }
+  if(count>0)
+    cout<<endl<<"THESE WERE THE WORDS CONTAINED INSIDE THE STRING"<<endl;
+  else
+    cout<<"NO WORDS INSIDE THE STRING"<<endl;
+}
+int main()
+{
+  string input;
+  cin>>input;
+ string dict[12];
+  for(int i=0;i<12;i++)
+    cin>>dict[i];
+  int d=4;
+  int c=0,count=0;
+  while(input[c]!='\0')
+  {
+    c++;
+    count++;
+  }
+  d=12;
+  wordCheck(dict,input,count-1,d);
+  return 0;
+}
