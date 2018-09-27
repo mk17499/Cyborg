@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n,sum;
+    cin>>n;
+    int coins[n];
+    for(int i=0;i<n;i++)
+        cin>>coins[i];
+    cin>>sum;
+    int arr[n][sum+1];
+    for(int i=0;i<=sum;i++)
+    {
+        arr[0][i]=i;
+    }
+    for(int i=1;i<n;i++)
+    {
+        for(int j=0;j<=sum;j++)
+        {
+            if(j>=coins[i])
+            {
+                arr[i][j]=min(arr[i-1][j],1+arr[i][j-coins[i]]);
+            }
+            else
+            arr[i][j]=arr[i-1][j];
+        }
+    }
+    cout<<arr[n-1][sum];
+    return 0;
+}
+/*  INPUT :
+  4
+  1 5 6 8
+  11
+  
+  OUTPUT :
+  2 */
