@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int subarray(int n,int sum,int set[])
+{
+  if(n==0 && sum>0 || sum<0)
+    return 0;
+  else if(sum==0)
+   return 1;
+  else
+   return subarray(n-1,sum,set) | subarray(n-1,sum-set[n-1],set);
+}
+int main()
+{
+  int condition;
+  int n,sum;
+  cin>>sum>>n;
+
+  int set[n];
+
+  for(int i=0;i<n;i++)
+    cin>>set[i];
+
+  condition = subarray(n,sum,set);
+
+  if(condition==1)
+    cout<<"TRUE";
+  else
+    cout<<"FALSE";
+
+  return 0;
+}
+
