@@ -11,6 +11,7 @@ int main()
   {
     cin>>set[i];
   }
+  // sort the set[] array //
 
   for(int i=0;i<n;i++)
   {
