@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+#include<string>
+using namespace std;
+// DYNAMIC PROGRAMMING APPROACH //
+int size(string a)
+{
+  int i=0,count=0;
+  while(a[i]!='\0')
+  {
+    count++;
+    i++;
+  }
+  return count;
+}
+int lcs(int size_a,int size_b,string a,string b)
+{
+  int i,j;
+  int arr[size_b+1][size_a+1];
+
+  for(i=0;i<=size_b;i++)
+  {
+    arr[i][0]=0;
+  }
+
+  for( j=0;j<=size_a;j++)
+  {
+    arr[0][j]=0;
+  }
+
+  for( i=1;i<=size_b;i++)
+  {
+    for( j=1;j<=size_a;j++)
+    {
+      if(b[i-1]==a[j-1])
+        arr[i][j]=1+arr[i-1][j-1];
+      else
+        arr[i][j]=max(arr[i-1][j], arr[i][j-1]);
+    }
+  }
+  return arr[i-1][j-1];
+}
+int main()
+{
+  string a,b;
+  cin>>a>>b;
+  int A,B;
+  A=size(a);
+  B=size(b);
+
+  if(A>=B){
+    int ans = lcs(A,B,a,b);
+    cout<<ans;
+  }
+  else
+  {
+    int ans = lcs(B,A,b,a);
+    cout<<ans;
+  }
+  return 0;
+}
+
+/*int lcs(string a,string b,int i,int j)
+{
+  if(a[i]=='\0' || b[j]=='\0')
+    return 0;
+  else if(a[i] == b[j])
+    return 1+ lcs(a,b,i+1,j+1);
+  else
+    return max(lcs(a,b,i,j+1),lcs(a,b,i+1,j));
+}
+int main()
+{
+  string a,b;
+  cin>>a>>b;
+  int ans= lcs(a,b,0,0);
+  cout<<ans;
+  return 0;
+}
+revursive approach (TIME CONSUMING)
+*/
