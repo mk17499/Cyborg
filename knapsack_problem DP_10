@@ -1,0 +1,82 @@
+#include<bits/stdc++.h>
+using namespace std;
+int dp(int current_wt,int W,int Max,int current_pos,int value,int wt[],int val[])
+{
+  if(current_wt>W && current_pos<=Max)
+   return 0;
+  else if(current_pos==Max)
+   return value;
+  else if(current_wt<=W && current_pos<=Max)
+   return  max(dp(current_wt + wt[current_pos],W,Max,current_pos+1,value+val[current_pos],wt,val),dp(current_wt,W,Max,current_pos+1,value,wt,val));
+
+}
+int main()
+{
+  int W,n;
+  cin>>W>>n;
+  int wt[n],val[n];
+  for(int i=0;i<n;i++)
+    cin>>wt[i];
+  for(int i=0;i<n;i++)
+    cin>>val[i];
+
+  int ans = dp(0,W,n,0,0,wt,val);
+  cout<<ans;
+  return 0;
+}
+/*
+INPUT
+6404180
+24
+382745
+799601
+909247
+729069
+467902
+ 44328
+ 34610
+698150
+823460
+903959
+853665
+551830
+610856
+670702
+488960
+951111
+323046
+446298
+931161
+ 31385
+496951
+264724
+224916
+169684
+825594
+1677009
+1676628
+1523970
+ 943972
+  97426
+  69666
+1296457
+1679693
+1902996
+1844992
+1049289
+1252836
+1319836
+ 953277
+2067538
+ 675367
+ 853655
+1826027
+  65731
+ 901489
+ 577243
+ 466257
+ 369261
+ 
+ OUTPUT
+ 13549094
+ */
