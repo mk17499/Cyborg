@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    long int T;
+    cin>>T;
+    while(T--)
+    {
+        long int N,sum=0,diff,count=0,index,temp,t,i,j;
+        cin>>N;
+        long int org[N],var[N];
+        for(i=0;i<N;i++)
+          cin>>org[i];
+        for(i=0;i<N;i++)
+        {
+          cin>>var[i];
+          sum+=var[i]-org[i];
+        }
+        if(sum==0 && sum%6==0)
+          cout<<"TAK\n";
+        
+        else if(sum%6!=0)
+          cout<<"NIE\n";
+          
+        else
+        {
+          bool cond=true;
+          t=(sum/6);
+          while(t--)
+           {
+             temp= 100000000;
+             for(i=0;i<N;i++)
+              {
+                diff= var[i] - org[i];
+                if(diff<temp &&  diff>0)
+                 {
+                    temp = diff;
+                    index=i;
+                 }
+              }
+                  var[index]= var[index]-1;
+                  var[index+1]=var[index+1]-2;
+                  var[index+2]=var[index+2]-3;
+           }
+             for(j=0;j<N;j++){
+                if(org[j]==var[j])
+                    continue;
+                else{
+                  cond=false;
+                  break;
+              }
+             }
+
+                if(cond)
+                    cout<<"TAK\n";
+                else 
+                    cout<<"NIE\n";
+        }
+    }
+      return 0;
+}
+    
