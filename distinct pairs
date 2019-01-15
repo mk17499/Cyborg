@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int M,N;
+    cin>>N>>M;
+    vector<pair<int,int>> a(N);
+    vector<pair<int,int>> b(M);
+    for(int i=0;i<N;i++)
+    {
+        cin>>a[i].first;
+        a[i].second = i;
+    }
+    for(int i=0;i<M;i++)
+    {
+        cin>>b[i].first;
+        b[i].second = i;
+    }
+     sort(a.begin(),a.end());
+     sort(b.begin(),b.end());
+
+     for(int i=0;i<M;i++)
+        cout<<a[0].second<<" "<<b[i].second<<endl;
+     for(int i=1;i<N;i++)
+        cout<<a[i].second<<" "<<b[M-1].second<<endl;
+
+   return 0;
+}
+/* this technique can be used to store indices of arrays and then arrays can be easily manipulated with their indices.
