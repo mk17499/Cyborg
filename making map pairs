@@ -1,0 +1,20 @@
+//Declaring the map data structure
+map<pair<int, int>, int> map_name;
+ 
+// To create one entry in the map
+map_name.insert(make_pair(make_pair(arg1,arg2), arg3));
+ 
+// To iterate the map create an iterator object first like this and then apply a for loop like this
+ 
+map<pair<int, int>, int> :: iterator iterator_name;
+for(iterator_name = map_name.begin(); iterator_name != map_name.end(); iterator_name++)
+{
+    //Do whatever you want. To access the first part of pair(pair is the key of the map here) you should write
+ 
+(iterator_name->first).first;
+ 
+// To access second part of pair
+(iterator_name->first). second;
+ 
+// To access the second part(value part) of the map simply use
+iterator_name->second
