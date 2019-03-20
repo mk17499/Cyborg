@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int DP(int N,int lookup[],int price[])
+{
+    if(lookup[N]!= -1)
+    {
+        return lookup[N];
+    }
+    else
+    {
+        int temp = INT_MIN;
+        int itr;
+        if(N%2==0)
+            itr = N/2;
+        else if(N%2 != 0)
+            itr = (N/2) + 1;
+        int ans;
+        for(int i = N-1;i>=itr;i--)
+        {
+            ans = max(price[i],DP(i,lookup,price)) + max(price[N-i],DP(N-i,lookup,price));
+            if(ans>temp)
+                temp = ans;
+        }
+        lookup[N] = temp;
+        return lookup[N];
+    }
+}
+int main()
+{
+     int N,i;
+     scanf("%d",&N);
+     int lookup[100000];
+     for(i = 1;i<100000;i++)
+        lookup[i] = -1;
+     int price[N+1];
+     for(i = 1;i<=N;i++)
+        scanf("%d",&price[i]);
+
+     lookup[1] = price[1];
+     lookup[2] = max(2*price[1],price[2]);
+
+     cout<<DP(N,lookup,price);
+
+}
