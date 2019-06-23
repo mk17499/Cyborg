@@ -1,0 +1,139 @@
+/* Prefix and suffix arrays are particularly useful when we are dealing range related queries of an array. Here the i'th element of 
+the prefix array contains the value of which is the mathematical (sum/pruduct/LCM/HCF/Mean/Median/Mode/.......) of elements of the
+array from index 0 to i. and the suffix array contains the same thing with the index being from i to N-1. This is useful because it
+helps us avoide brute force calculation for every query. 
+
+A question that came in codechef JUNE CLALLENGE 2019 used this concept. The question was not mathematically complex, but the 
+constraints were tight. So the computational speed needed was of lograthmic complexity, even a linear order solution would lead 
+to TLE verdict. 
+
+The question code is SUMAGCD and the link is : https://www.codechef.com/JUNE19B/problems/SUMAGCD
+
+In this particular question, the mathematical function was GCD so the prefix and suffix arrays conatined GCD's of elements of the
+array. 
+
+Here is the solution */
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        int T;
+        cin>>T;
+        while(T--)
+        {
+                int N;
+                cin>>N;
+                vector<int> v;
+
+                for(int i = 0;i<N;i++)
+                {
+                        int a;
+                        cin>>a;
+                        v.push_back(a);
+                }
+
+                sort(v.begin(),v.end());
+                v.erase(unique(v.begin(),v.end()),v.end());
+
+                if(v.size() == 1)
+                {
+                        cout<<2*v[0]<<endl;
+                        continue;
+                }
+                else if(v.size() == 2)
+                        cout<<v[0] + v[1]<<endl;
+
+                else
+                {
+
+                        vector<int> pre(N + 2);
+                        vector<int> suff(N + 2);
+
+                        int temp = v[0];
+                        pre[0] = v[0];
+                        suff[v.size()-1] = v[v.size()-1];
+
+                        for(int i = 1;i<v.size();i++)
+                                pre[i] = __gcd(pre[i-1],v[i]);
+
+                        for(int i = v.size()-2;i>=0;i--)
+                                suff[i] = __gcd(suff[i+1],v[i]);
+                        int max = 0;
+
+                        for(int i = 0;i<v.size();i++)
+                        {
+                                if(i == 0)
+                                {
+                                        temp = v[0] + suff[1];
+                                        if(temp>max)
+                                                max = temp;
+                                }
+                                else if(i == v.size()-1)
+                                {
+                                        temp = v[v.size()-1] + pre[v.size()-2];
+                                        if(temp>max)
+                                                max = temp;
+                                }
+                                else
+                                {
+                                        temp = v[i] + __gcd(pre[i-1], suff[i+1]);
+                                        if(temp > max)
+                                                max = temp;
+                                }
+                        }
+
+                        cout<<max<<endl;
+                }
+        }
+        return 0;
+}
+
+The explanation of the solution is as follows :
+EXPLANATION
+
+Case 1: When all the elements are same, then answer will be 2 times that element.
+
+Case 2: When there are atleast two distinct elements in the array.
+
+Its only logical to have all the elements with same value in only one set. Let us prove it formally.
+Assume they are present in both sets, moving them all into the first set will not affect GCD(B).
+On other hand, it might help to increase value of GCD(C).
+
+So now, we remove all the duplicate from A and solve on this new array.
+
+Claim: Let us take a set of 2 or more distinct elements. Lets call this set D. Let y be the maximum in D. Now GCD(D)≤y/2. 
+Because GCD(D) must be less than y and divide y.
+
+Lets assume size(B)≤size(C).
+
+Lets say maximum value in A is x. Now , answer is greater than or equal to x+1 (taking set B as {x}).
+This is a lower bound on the answer.
+
+Claim: size(B)=1 in optimal partition.
+Proof: Proof by contradiction
+
+Assume size(B)≥2. Now GCD(B)≤x/2. And similarly GCD(C)≤x/2.
+So now, GCD(B)+GCD(C)≤x which is worse than the lower bound obtained above.
+Hence, size(B)=1.
+
+Now we will check all the possibilities for B and take maximum of all.There are atmost n possibilities for B.
+So for each possibility, we have to calculate the gcd of rest n-1 elements which are in set C.
+For this, we can compute prefix gcd’s and suffix gcd’s of the array A. And now let B be {Aj}.
+
+So GCD(C) = gcd(prefix gcd till j−1, suffix gcd till j+1).
+
+TIME COMPLEXITY
+
+O(nlog(n)) to remove duplicates from the array.
+O(nlog(Amax)) to construct the prefix gcd and suffix gcd of the array.
+O(nlog(Amax)) to check for all possibilities for B.
+
+Hence , total complexity is O(n(log(n)+log(Amax))
+
+
