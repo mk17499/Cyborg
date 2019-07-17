@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long countOnes (int n)
+{
+    long long count=0;
+    while (n!=0)
+    {
+        n = n & (n-1);
+        count++;
+    }
+    return count;
+}
+int main()
+{
+        int N;
+        cin>>N;
+
+        while(N--)
+        {
+                long long x;
+                cin>>x;
+
+                long long c = countOnes(x);
+                cout<<c<<endl;
+        }
+}
+/* This code is an optimized version of moving bit by bit. This will run in the order on the number of ones present in the binary
+representation of the number.*/
